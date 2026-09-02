@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Manager 360 - Google tag</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Roboto, Arial, sans-serif;
+            color: #3c4043;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            height: 48px;
+            background: #fff;
+            border-bottom: 1px solid #dadce0;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 13px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 24px;
+        }
+
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #34a853;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-weight: 500;
+            color: #5f6368;
+        }
+
+        .breadcrumb {
+            color: #5f6368;
+        }
+
+        .breadcrumb span {
+            color: #202124;
+            font-weight: 500;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Left Navigation */
+        .sidebar {
+            width: 200px;
+            background: #fff;
+            border-right: 1px solid #dadce0;
+            padding-top: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 24px;
+            font-size: 13px;
+            color: #5f6368;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background-color: #f1f3f4;
+        }
+
+        .nav-item.active {
+            background-color: #e6f4ea;
+            color: #137333;
+            font-weight: 500;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-right: 8px;
+        }
+
+        .nav-group-title {
+            padding: 12px 24px 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-group-title::before {
+            content: "▼";
+            font-size: 8px;
+        }
+
+        .sub-nav .nav-item {
+            padding-left: 36px;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            background: #fff;
+            overflow-y: auto;
+            padding: 0 32px 32px 32px;
+        }
+
+        /* Sub-navigation tabs */
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #dadce0;
+            margin-bottom: 24px;
+        }
+
+        .tab-item {
+            padding: 16px 24px;
+            font-size: 13px;
+            color: #5f6368;
+            cursor: pointer;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-item.active {
+            color: #1a73e8;
+            border-bottom: 2px solid #1a73e8;
+            font-weight: 500;
+        }
+
+        /* Cards */
+        .card {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            background: #fff;
+            position: relative;
+        }
+
+        .welcome-card-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .welcome-title {
+            font-size: 20px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 12px;
+        }
+
+        .welcome-desc {
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        .dismiss-btn {
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* Section Title & Subhead */
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #202124;
+        }
+
+        .link-action {
+            color: #1a73e8;
+            font-size: 13px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Tag Flow Container */
+        .tag-flow {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin: 20px 0;
+        }
+
+        .flow-box {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 240px;
+            background: #fff;
+        }
+
+        .tag-icon-circle {
+            width: 28px;
+            height: 28px;
+            background: #1a73e8;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .destination-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: conic-gradient(#ea4335 0 90deg, #4285f4 90deg 180deg, #34a853 180deg 270deg, #fbbc05 270deg);
+        }
+
+        .flow-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flow-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+        }
+
+        .flow-sub {
+            font-size: 11px;
+            color: #5f6368;
+            margin-top: 2px;
+        }
+
+        .flow-connector {
+            flex: 1;
+            height: 1px;
+            background: #dadce0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flow-connector-icon {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #dadce0;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #70757a;
+        }
+
+        .quality-row {
+            border-top: 1px solid #dadce0;
+            padding-top: 16px;
+            margin-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quality-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .status-bars {
+            display: flex;
+            gap: 4px;
+        }
+
+        .bar {
+            width: 24px;
+            height: 4px;
+            background: #34a853;
+            border-radius: 2px;
+        }
+
+        /* Settings List Section */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f3f4;
+            cursor: pointer;
+        }
+
+        .setting-item-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .setting-icon {
+            font-size: 16px;
+            color: #5f6368;
+            width: 20px;
+            text-align: center;
+        }
+
+        .setting-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 2px;
+        }
+
+        .setting-desc {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .chevron-right {
+            font-size: 12px;
+            color: #70757a;
+        }
+
+        .show-more-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 16px;
+        }
+
+        .show-more-btn {
+            background: none;
+            border: none;
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Overlay Modal Component Common */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.32);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: #fff;
+            width: 820px;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid #dadce0;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .modal-close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #5f6368;
+            cursor: pointer;
+        }
+
+        .modal-header-title {
+            font-size: 16px;
+            font-weight: 400;
+            color: #202124;
+            flex: 1;
+        }
+
+        .modal-tag-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f1f3f4;
+            padding: 4px 12px;
+            border-radius: 16px;
+        }
+
+        .modal-tag-chip .chip-icon {
+            width: 16px;
+            height: 16px;
+            background: #1a73e8;
+            color: #fff;
+            font-size: 10px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-tag-chip-text {
+            font-size: 12px;
+            line-height: 1.2;
+        }
+
+        .modal-body {
+            padding: 24px 32px;
+            overflow-y: auto;
+        }
+
+        .modal-subhead {
+            font-size: 13px;
+            color: #5f6368;
+            margin-bottom: 20px;
+        }
+
+        .modal-section-box {
+            border: 1px solid #dadce0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .modal-section-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 16px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-info {
+            display: flex;
+            gap: 16px;
+            max-width: 650px;
+        }
+
+        .event-icon-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 12px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .event-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 2px;
+        }
+
+        .event-desc {
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 1.4;
+        }
+
+        /* UI Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #bdc1c6;
+            transition: .2s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .2s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #1a73e8;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(16px);
+        }
+
+        /* Warning Banner Styles for Domains Modal */
+        .warning-banner {
+            border: 1px solid #f9ab00;
+            background-color: #fef7e0;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #3c4043;
+        }
+
+        .warning-icon {
+            color: #b06000;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-outline {
+            background: #fff;
+            border: 1px solid #dadce0;
+            color: #1a73e8;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-container">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Campaign Manager 360</span>
+        </div>
+        <div class="breadcrumb">
+            TP - Liberty Interactive Marketing - BLINC - CM360 - US &gt; <span>Team Liberty - Test</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="#" class="nav-item">Campaigns</a>
+            <a href="#" class="nav-item">Properties</a>
+            <a href="#" class="nav-item">Creatives</a>
+            <a href="#" class="nav-item">Creative projects</a>
+            <a href="#" class="nav-item">Landing pages</a>
+            <a href="#" class="nav-item">Creative fields</a>
+            
+            <div class="nav-group-title">Floodlight</div>
+            <div class="sub-nav">
+                <a href="#" class="nav-item">Configuration</a>
+                <a href="#" class="nav-item active">Google tag</a>
+                <a href="#" class="nav-item">Activities</a>
+                <a href="#" class="nav-item">Activity groups</a>
+            </div>
+
+            <a href="#" class="nav-item">Audience</a>
+            <a href="#" class="nav-item">Targeting templ...</a>
+            
+            <div class="nav-group-title" style="margin-top: auto;">Admin</div>
+            <div class="sub-nav">
+                <a href="#" class="nav-item">Account</a>
+                <a href="#" class="nav-item">Subaccounts</a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <div class="tabs-header">
+                <a href="#" class="tab-item active">Configuration</a>
+                <a href="#" class="tab-item">History</a>
+                <a href="#" class="tab-item">Admin</a>
+            </div>
+
+            <div class="card">
+                <div class="welcome-card-content">
+                    <div>
+                        <h2 class="welcome-title">Welcome to your Google tag</h2>
+                        <p class="welcome-desc">
+                            The global site tag (gtag.js) is now the Google tag. With this change, new and existing gtag.js installations will get new capabilities to help you do more, improve data quality, and adopt new features – all without additional code. <a href="#" class="link-action">Learn more</a>
+                        </p>
+                    </div>
+                    <button class="dismiss-btn">Dismiss</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header-row">
+                    <div class="card-title">Your Google tag</div>
+                    <a href="#" class="link-action">Installation instructions</a>
+                </div>
+
+                <div class="tag-flow">
+                    <div class="flow-box">
+                        <div class="tag-icon-circle">G</div>
+                        <div class="flow-details">
+                            <span class="flow-name">Team Liberty - Test</span>
+                            <span class="flow-sub">IDs: DC-14669188, GT-5TQV6M3V</span>
+                        </div>
+                    </div>
+
+                    <div class="flow-connector">
+                        <span class="flow-connector-icon">?</span>
+                    </div>
+
+                    <div class="flow-box">
+                        <div class="destination-icon"></div>
+                        <div class="flow-details">
+                            <span class="flow-name">Team Liberty - Test</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quality-row">
+                    <div class="quality-status">
+                        <span>Tag quality: <strong>Excellent</strong></span>
+                        <div class="status-bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <span style="color: #5f6368; margin-left: 12px;">No issues detected.</span>
+                    </div>
+                    <a href="#" class="link-action">Learn more</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title" style="margin-bottom: 4px;">Settings</div>
+                <div style="font-size: 12px; color: #5f6368; margin-bottom: 16px;">
+                    Some tag settings apply only to specific destinations. <a href="#" class="link-action" style="font-weight: normal;">Learn more about tag settings</a>
+                </div>
+
+                <div class="settings-list">
+                    <div class="setting-item" id="openEventsModalBtn">
+                        <div class="setting-item-left">
+                            <span class="setting-icon">✦</span>
+                            <div>
+                                <div class="setting-title">Manage automatic event detection</div>
+                                <div class="setting-desc">Configure which types of events your Google tag should automatically detect for measurement in associated destinations</div>
+                            </div>
+                        </div>
+                        <span class="chevron-right">&gt;</span>
+                    </div>
+
+                    <div class="setting-item" id="openDomainsModalBtn">
+                        <div class="setting-item-left">
+                            <span class="setting-icon">⇉</span>
+                            <div>
+                                <div class="setting-title">Configure your domains</div>
+                                <div class="setting-desc">Specify a list of domains for cross-domain measurement</div>
+                            </div>
+                        </div>
+                        <span class="chevron-right">&gt;</span>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-item-left">
+                            <span class="setting-icon">☷</span>
+                            <div>
+                                <div class="setting-title">Allow user-provided data capabilities</div>
+                                <div class="setting-desc">Configure whether your Google tag should allow user-provided data to be included in measurement for destination products that accept such data.</div>
+                            </div>
+                        </div>
+                        <span class="chevron-right">&gt;</span>
+                    </div>
+                </div>
+
+                <div class="show-more-row">
+                    <button class="show-more-btn">
+                        Show more
+                        <span style="font-size: 10px; margin-left: 2px;">▼</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-backdrop" id="eventsModalBackdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <button class="modal-close-btn" class="closeModalBtn">&times;</button>
+                <div class="modal-header-title">Manage automatic event detection</div>
+                <div class="modal-tag-chip">
+                    <div class="chip-icon">G</div>
+                    <div class="modal-tag-chip-text">
+                        <strong>Team Liberty - Test</strong><br>
+                        <span style="color: #5f6368; font-size: 10px;">DC-14669188</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-subhead">
+                    Configure which types of events your Google tag should automatically detect for measurement in associated destinations.
+                </div>
+
+                <div class="modal-section-box">
+                    <div class="modal-section-title">Configuration</div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #1a73e8;">👁</div>
+                            <div>
+                                <div class="event-title">Page views</div>
+                                <div class="event-desc">Detect a page view event each time a page loads</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #e91e63;">🕒</div>
+                            <div>
+                                <div class="event-title">Page views on browser history change</div>
+                                <div class="event-desc">Detect a page view event each time the website changes the browser history state. This setting is useful for detecting page views in single-page applications.</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #34a853;">⇕</div>
+                            <div>
+                                <div class="event-title">Scrolls</div>
+                                <div class="event-desc">Detect scroll events each time a visitor gets to the bottom of the page</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #00bcd4;">↗</div>
+                            <div>
+                                <div class="event-title">Outbound clicks</div>
+                                <div class="event-desc">Detect an outbound click event each time a visitor clicks a link that leads them away from your domain(s). By default, outbound click events will occur for all links leading away from the current domain. Links to domains configured for cross-domain measurement in tag settings will not trigger outbound click events.</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #8bc34a;">📋</div>
+                            <div>
+                                <div class="event-title">Form interactions</div>
+                                <div class="event-desc">Detect a form interaction or form submission event each time a visitor interacts with a form on your site</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #4caf50;">▶</div>
+                            <div>
+                                <div class="event-title">Video engagement</div>
+                                <div class="event-desc">Detect video play, progress, and complete events as visitors view embedded videos on your site. By default, video events will be automatically detected for YouTube videos embedded on your site with <a href="#" class="link-action">JS API support</a> enabled.</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="event-item">
+                        <div class="event-info">
+                            <div class="event-icon-circle" style="background: #1976d2;">⤓</div>
+                            <div>
+                                <div class="event-title">File downloads</div>
+                                <div class="event-desc">Detect a file download event each time a link is clicked with a common document, compressed file, application, video, or audio extension</div>
+                            </div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop" id="domainsModalBackdrop">
+        <div class="modal-card">
+            <div class="modal-header">
+                <button class="modal-close-btn" class="closeModalBtn">&times;</button>
+                <div class="modal-header-title">Configure your domains</div>
+                <div class="modal-tag-chip">
+                    <div class="chip-icon">G</div>
+                    <div class="modal-tag-chip-text">
+                        <strong>Team Liberty - Test</strong><br>
+                        <span style="color: #5f6368; font-size: 10px;">DC-14669188</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="warning-banner">
+                    <span class="warning-icon">⚠️</span>
+                    <span>Cross-domain measurement works by appending parameters to the URLs on your website. In rare cases, your web server may run into an error.</span>
+                </div>
+
+                <div class="modal-subhead">
+                    Specify all of your domains that use this tag. This list enables cross-domain measurement and further defines which links trigger Outbound Click events when using enhanced measurement. <a href="#" class="link-action">Learn more about cross-domain measurement</a>
+                </div>
+
+                <div class="modal-section-box">
+                    <div class="modal-section-title">Cross-domain Linking Configuration</div>
+                    <div style="font-size: 13px; color: #5f6368; margin-bottom: 16px;">Include domains that match the following conditions</div>
+                    <button class="btn-outline">Add condition</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const eventsModal = document.getElementById('eventsModalBackdrop');
+        const domainsModal = document.getElementById('domainsModalBackdrop');
+
+        document.getElementById('openEventsModalBtn').addEventListener('click', () => {
+            eventsModal.classList.add('open');
+        });
+
+        document.getElementById('openDomainsModalBtn').addEventListener('click', () => {
+            domainsModal.classList.add('open');
+        });
+
+        // Close logic for all close buttons and backdrop clicks
+        document.querySelectorAll('.modal-close-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.target.closest('.modal-backdrop').classList.remove('open');
+            });
+        });
+
+        [eventsModal, domainsModal].forEach(backdrop => {
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) {
+                    backdrop.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
