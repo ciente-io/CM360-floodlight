@@ -1,0 +1,1444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaign Manager 360 - Configuration</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Roboto, Arial, sans-serif;
+            color: #3c4043;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            height: 48px;
+            background: #fff;
+            border-bottom: 1px solid #dadce0;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            font-size: 13px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 24px;
+        }
+
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #34a853;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-weight: 500;
+            color: #5f6368;
+        }
+
+        .breadcrumb {
+            color: #5f6368;
+        }
+
+        .breadcrumb span {
+            color: #202124;
+            font-weight: 500;
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Left Navigation */
+        .sidebar {
+            width: 200px;
+            background: #fff;
+            border-right: 1px solid #dadce0;
+            padding-top: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 24px;
+            font-size: 13px;
+            color: #5f6368;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background-color: #f1f3f4;
+        }
+
+        .nav-item.active {
+            background-color: #e6f4ea;
+            color: #137333;
+            font-weight: 500;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            margin-right: 8px;
+        }
+
+        .nav-group-title {
+            padding: 12px 24px 4px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-group-title::before {
+            content: "▼";
+            font-size: 8px;
+        }
+
+        .sub-nav .nav-item {
+            padding-left: 36px;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            background: #fff;
+            overflow-y: auto;
+            padding: 16px 32px;
+        }
+
+        /* Banner */
+        .info-banner {
+            background-color: #e8f0fe;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            font-size: 13px;
+        }
+
+        .info-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1967d2;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        /* Page Header */
+        .page-header {
+            margin-bottom: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 20px;
+            font-weight: 400;
+            color: #202124;
+        }
+
+        .advertiser-id {
+            font-size: 12px;
+            color: #5f6368;
+            margin-top: 2px;
+        }
+
+        /* Actions Bar */
+        .actions-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            height: 32px;
+            padding: 0 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-outline {
+            background: #fff;
+            border-color: #dadce0;
+            color: #3c4043;
+        }
+
+        .btn-outline:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn-outline.disabled {
+            background-color: #fff;
+            border-color: #e0e0e0;
+            color: #b0b0b0;
+            cursor: default;
+        }
+
+        .btn-primary {
+            background: #137333;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #0d652d;
+        }
+
+        /* Form Sections */
+        .form-section {
+            border-top: 1px solid #dadce0;
+            padding: 24px 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #202124;
+            margin-bottom: 16px;
+        }
+
+        .help-icon {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #70757a;
+            border-radius: 2px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #70757a;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .input-label {
+            width: 140px;
+            text-align: right;
+            padding-right: 16px;
+            color: #5f6368;
+        }
+
+        .input-field {
+            width: 50px;
+            height: 32px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .consent-row {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 8px;
+        }
+
+        .consent-label {
+            width: 200px;
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+            padding-right: 16px;
+        }
+
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .toggle-label {
+            width: 200px;
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+            padding-right: 16px;
+            text-align: right;
+        }
+
+        /* Toggle Button Component */
+        .toggle-switch {
+            display: inline-flex;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f1f3f4;
+        }
+
+        .toggle-option {
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            color: #5f6368;
+            background: #f1f3f4;
+            user-select: none;
+        }
+
+        .toggle-option.active-on {
+            background: #1a73e8;
+            color: #fff;
+        }
+
+        .toggle-option.active-off {
+            background: #e8eaed;
+            color: #202124;
+            box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
+        }
+
+        /* Location Exclusion Section Styles */
+        .exclusion-options {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-group-row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .radio-group-label {
+            width: 200px;
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+            padding-right: 16px;
+            text-align: right;
+        }
+
+        .radio-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #3c4043;
+        }
+
+        .dropdown-row {
+            display: flex;
+            align-items: center;
+            margin-top: 4px;
+        }
+
+        .dropdown-label {
+            width: 200px;
+            font-size: 13px;
+            color: #5f6368;
+            padding-right: 16px;
+            text-align: right;
+        }
+
+        .select-field {
+            width: 240px;
+            height: 32px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 0 8px;
+            font-size: 13px;
+            background-color: #fff;
+            color: #3c4043;
+            outline: none;
+        }
+
+        .select-field:focus {
+            border-color: #1a73e8;
+        }
+
+        .consent-action {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .status-text {
+            font-size: 13px;
+            color: #3c4043;
+            margin-bottom: 4px;
+        }
+
+        .consent-hint {
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        /* Tags Section Styles */
+        .tags-info-block {
+            margin-top: 16px;
+            max-width: 540px;
+        }
+
+        .tags-info-text {
+            font-size: 12px;
+            color: #5f6368;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .link-text {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .link-text:hover {
+            text-decoration: underline;
+        }
+
+        /* Table & Section Layout Styles */
+        .section-content-row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .section-left-label {
+            width: 200px;
+            font-size: 13px;
+            color: #5f6368;
+            line-height: 1.4;
+            padding-right: 16px;
+            text-align: right;
+        }
+
+        .section-right-content {
+            flex: 1;
+        }
+
+        .data-table-container {
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .table-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: #fff;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 10px 16px;
+            font-weight: 500;
+            color: #5f6368;
+            border-top: 1px solid #dadce0;
+            border-bottom: 1px solid #dadce0;
+            background-color: #fff;
+        }
+
+        .data-table td {
+            padding: 12px 16px;
+            color: #3c4043;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        .data-table tr.empty-row td {
+            padding: 24px 16px;
+            text-align: center;
+            color: #202124;
+            font-size: 13px;
+        }
+
+        .table-pagination {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 8px 16px;
+            gap: 16px;
+            font-size: 12px;
+            color: #5f6368;
+            background: #fff;
+        }
+
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .page-arrow {
+            cursor: pointer;
+            color: #5f6368;
+            user-select: none;
+        }
+
+        .page-arrow.disabled {
+            color: #dadce0;
+            cursor: default;
+        }
+
+        /* Collapsible Section Header */
+        .collapsible-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+
+        .arrow-down {
+            font-size: 10px;
+            color: #5f6368;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            color: #3c4043;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            margin-top: 2px;
+        }
+
+        .search-input-field {
+            width: 100%;
+            max-width: 400px;
+            height: 32px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            padding: 0 12px;
+            font-size: 13px;
+            margin-bottom: 8px;
+            outline: none;
+        }
+
+        .search-input-field:focus {
+            border-color: #1a73e8;
+        }
+
+        /* Enhanced Conversions Styles */
+        .enhanced-conversions-content {
+            font-size: 13px;
+            max-width: 900px;
+        }
+
+        .enhanced-conversions-desc {
+            color: #3c4043;
+            line-height: 1.4;
+            margin-bottom: 16px;
+        }
+
+        .enhanced-checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nested-checkbox-container {
+            margin-left: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sub-text {
+            font-size: 12px;
+            color: #5f6368;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        /* Notice Banner */
+        .warning-banner {
+            background-color: #fef7e0;
+            border-radius: 4px;
+            padding: 10px 16px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #202124;
+        }
+
+        /* Tags Pill list for device types */
+        .tags-pill-list {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pill-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #dadce0;
+            border-radius: 16px;
+            padding: 4px 10px;
+            font-size: 12px;
+            color: #3c4043;
+            background: #fff;
+        }
+
+        .pill-remove {
+            cursor: pointer;
+            color: #5f6368;
+            font-size: 12px;
+        }
+
+        .clear-all-link {
+            color: #1a73e8;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: 4px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+        <div class="logo-container">
+            <div class="logo-icon"></div>
+            <span class="logo-text">Campaign Manager 360</span>
+        </div>
+        <div class="breadcrumb">
+            TP - Liberty Interactive Marketing - BLINC - CM360 - US &gt; <span>Team Liberty - Test</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar">
+            <a href="#" class="nav-item">Campaigns</a>
+            <a href="#" class="nav-item">Properties</a>
+            <a href="#" class="nav-item">Creatives</a>
+            <a href="#" class="nav-item">Creative projects</a>
+            <a href="#" class="nav-item">Landing pages</a>
+            <a href="#" class="nav-item">Creative fields</a>
+            
+            <div class="nav-group-title">Floodlight</div>
+            <div class="sub-nav">
+                <a href="#" class="nav-item active">Configuration</a>
+                <a href="#" class="nav-item">Google tag</a>
+                <a href="#" class="nav-item">Activities</a>
+                <a href="#" class="nav-item">Activity groups</a>
+            </div>
+
+            <a href="#" class="nav-item">Audience</a>
+            <a href="#" class="nav-item">Targeting templ...</a>
+            
+            <div class="nav-group-title" style="margin-top: auto;">Admin</div>
+            <div class="sub-nav">
+                <a href="#" class="nav-item">Account</a>
+                <a href="#" class="nav-item">Subaccounts</a>
+            </div>
+        </nav>
+
+        <main class="content">
+            <div class="info-banner">
+                <div class="info-icon">i</div>
+                <div>
+                    <strong>Verify your settings for consented data collection</strong> – Review which Google services can receive consented personal data from the European Economic Area (EEA)
+                </div>
+            </div>
+
+            <div class="page-header">
+                <h1>Configuration</h1>
+                <div class="advertiser-id">Advertiser ID: 14669188</div>
+            </div>
+
+            <div class="actions-bar">
+                <button class="btn btn-outline">Share advertiser</button>
+            </div>
+
+            <div class="actions-bar">
+                <button class="btn btn-primary">Save</button>
+                <button class="btn btn-outline">Discard changes</button>
+                <button class="btn btn-outline">Change log</button>
+            </div>
+
+            <section class="form-section" style="border-top: none; padding-top: 0;">
+                <div class="section-header">
+                    Conversion windows <span class="help-icon">?</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Clicks required</label>
+                    <input type="text" class="input-field" value="30">
+                    <span>days</span>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Impressions required</label>
+                    <input type="text" class="input-field" value="14">
+                    <span>days</span>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Default consent settings for tag data
+                </div>
+                
+                <div class="consent-row">
+                    <div class="consent-label">Default consent settings for tag data</div>
+                    <div class="consent-action">
+                        <button class="btn btn-outline" style="width: fit-content;">Configure</button>
+                        <div class="consent-hint">Set default settings for personal data collected by your Google tag from the European Economic Area (EEA)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Services that can receive tag data
+                </div>
+                
+                <div class="consent-row">
+                    <div class="consent-label">Services that can receive tag data</div>
+                    <div class="consent-action">
+                        <button class="btn btn-outline" style="width: fit-content;">Configure</button>
+                        <div class="consent-hint">Choose which Google services can receive consented tag data from the European Economic Area (EEA)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Default consent settings for imported and uploaded data
+                </div>
+                
+                <div class="consent-row">
+                    <div class="consent-label">Default consent settings for imported and uploaded data</div>
+                    <div class="consent-action">
+                        <div class="status-text">Imported and uploaded data will be marked as not having consent granted</div>
+                        <button class="btn btn-outline" style="width: fit-content;">Configure</button>
+                        <div class="consent-hint">Set default settings for imported or uploaded personal data from the European Economic Area (EEA)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Services that can receive imported and uploaded data
+                </div>
+                
+                <div class="consent-row">
+                    <div class="consent-label">Services that can receive imported and uploaded data</div>
+                    <div class="consent-action">
+                        <div class="status-text">All Google services can receive imported and uploaded data</div>
+                        <button class="btn btn-outline" style="width: fit-content;">Configure</button>
+                        <div class="consent-hint">Choose which Google services can receive consented imported data in the European Economic Area (EEA)</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Personalized ad exclusions <span class="help-icon">?</span>
+                </div>
+                
+                <div class="toggle-row">
+                    <div class="toggle-label">Apply personalized ad exclusions for all floodlight activities</div>
+                    <div class="toggle-switch">
+                        <div id="btn-on" class="toggle-option active-on" onclick="setExclusionToggle(true)">ON</div>
+                        <div id="btn-off" class="toggle-option" onclick="setExclusionToggle(false)">OFF</div>
+                    </div>
+                </div>
+
+                <div id="exclusion-details" class="exclusion-options">
+                    <div class="radio-group-row">
+                        <div class="radio-group-label">Exclude the following locations from personalized ads</div>
+                        <div class="radio-options">
+                            <label class="radio-option">
+                                <input type="radio" name="location_exclusion" value="all">
+                                All locations
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="location_exclusion" value="select" checked>
+                                Select locations
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-row">
+                        <div class="dropdown-label">Countries</div>
+                        <select class="select-field">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+
+                    <div class="dropdown-row">
+                        <div class="dropdown-label">Regions in North America</div>
+                        <select class="select-field">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+
+                    <div class="dropdown-row">
+                        <div class="dropdown-label">Other areas</div>
+                        <select class="select-field">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Tags
+                </div>
+
+                <div class="radio-group-row">
+                    <div class="radio-group-label" style="display: flex; justify-content: flex-end; align-items: center; gap: 4px;">
+                        Enabled <span class="help-icon">?</span>
+                    </div>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="tags_enabled" value="dynamic">
+                            Dynamic
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="tags_enabled" value="image">
+                            Image
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="tags_enabled" value="none" checked>
+                            None
+                        </label>
+
+                        <div class="tags-info-block">
+                            <p class="tags-info-text">
+                                Enable either dynamic or image tags here, then add the desired code to each of your Floodlight activities.
+                            </p>
+                            <p class="tags-info-text">
+                                Dynamic tags can't be delivered when image tags are implemented. However, dynamic tags will still be delivered for any Iframe Floodlight tags you've already implemented. <a href="#" class="link-text">Learn more</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Google Analytics
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label"></div>
+                    <div class="section-right-content">
+                        <div class="data-table-container">
+                            <div class="table-toolbar">
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">New link</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px;"><input type="checkbox"></th>
+                                        <th>Property name</th>
+                                        <th>Property ID</th>
+                                        <th>Requested by</th>
+                                        <th>Last modified</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="empty-row">
+                                        <td colspan="6">No Google Analytics property links found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="table-pagination">
+                                <span>Items per page: 10</span>
+                                <span>0 of 0</span>
+                                <div class="pagination-controls">
+                                    <span class="page-arrow disabled">&lt;</span>
+                                    <span class="page-arrow disabled">&gt;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Firebase <span class="help-icon">?</span>
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label">Firebase projects</div>
+                    <div class="section-right-content">
+                        <div class="data-table-container">
+                            <div class="table-toolbar">
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">Link Firebase project</button>
+                                <button class="btn btn-outline disabled">Unlink</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 250px;">Firebase project</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="empty-row">
+                                        <td colspan="2" style="padding: 16px;">
+                                            <a href="#" class="link-text">Link this Floodlight configuration</a> to a Firebase project.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Display &amp; Video 360 association
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label"></div>
+                    <div class="section-right-content">
+                        <div class="data-table-container">
+                            <div class="table-toolbar">
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">New association</button>
+                                <button class="btn btn-outline disabled">Remove</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 200px;">Partner</th>
+                                        <th style="width: 200px;">CM site(s)</th>
+                                        <th style="width: 150px;">Status</th>
+                                        <th>Allow list management</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="empty-row">
+                                        <td colspan="4" style="font-weight: 400; color: #3c4043;">
+                                            This Floodlight configuration is not associated with a Display &amp; Video 360 Partner yet.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Ads Data Hub
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Enhanced attribution
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label">Enhanced attribution</div>
+                    <div class="section-right-content">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            <span>Enable across Google Marketing Platform</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Custom Floodlight variables <span class="help-icon">?</span>
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label"></div>
+                    <div class="section-right-content">
+                        <div class="data-table-container" style="max-width: 500px;">
+                            <div class="table-pagination" style="border-bottom: 1px solid #dadce0;">
+                                <span>1–25 of 100</span>
+                                <div class="pagination-controls">
+                                    <span class="page-arrow disabled">&lt;</span>
+                                    <span class="page-arrow">&gt;</span>
+                                </div>
+                            </div>
+                            <div style="padding: 8px 12px; background: #fff;">
+                                <input type="text" class="search-input-field" placeholder="Search by friendly name...">
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 80px;">Variable</th>
+                                        <th style="width: 200px;">Friendly name <span class="help-icon">?</span></th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td></td>
+                                        <td>string</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Enhanced conversions
+                </div>
+
+                <div class="enhanced-conversions-content">
+                    <p class="enhanced-conversions-desc">
+                        Enhanced conversions use data customers provide on your website (such as email addresses) to improve measurement and optimize your campaigns. This setting needs to be completed for each Floodlight activity or Google Tag Manager tag. <a href="#" class="link-text">Learn more about enhanced conversions</a>
+                    </p>
+
+                    <div class="enhanced-checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked>
+                            <span>Turn on enhanced conversions.</span>
+                        </label>
+
+                        <div class="nested-checkbox-container">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span>On behalf of your company, you confirm that your company will comply with <a href="#" class="link-text">Google's policies</a>. You are instructing Google to process your company's data as described in <a href="#" class="link-text">how Google uses enhanced conversion data</a>. The <a href="#" class="link-text">Google Ads Data Processing Terms</a> apply to enhanced conversions.</span>
+                            </label>
+
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <div>
+                                    <span>Automatically detect user-provided data</span>
+                                    <div class="sub-text">
+                                        By enabling this setting, you are allowing Campaign Manager to collect elements of user-provided data that are detected by Google Tag. You can select the specific items you would like Campaign Manager to collect. Note that this setting depends on your Google Tag configuration. Campaign manager cannot automatically collect elements if they have been disallowed in your tag settings. <a href="#" class="link-text">Learn more</a>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    App attribution <span class="help-icon">?</span>
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label">Third party app attribution tracking</div>
+                    <div class="section-right-content">
+                        <div class="data-table-container">
+                            <div class="table-toolbar">
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">Link app analytics developer</button>
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">Reuse app analytics developer link</button>
+                                <button class="btn btn-outline disabled">Unlink</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 250px;">App</th>
+                                        <th style="width: 200px;">App analytics partner</th>
+                                        <th>Link ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="empty-row">
+                                        <td colspan="3" style="padding: 16px;">
+                                            <a href="#" class="link-text">Link this Floodlight configuration</a> to a app analytics developer.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Server to server <span class="help-icon">?</span>
+                </div>
+
+                <div class="section-content-row" style="margin-bottom: 16px;">
+                    <div class="section-left-label">Server to server attribution tracking</div>
+                    <div class="section-right-content">
+                        <label class="checkbox-label">
+                            <input type="checkbox">
+                            <span>Enable</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label">Tokens</div>
+                    <div class="section-right-content">
+                        <div class="data-table-container" style="max-width: 500px;">
+                            <div class="table-toolbar">
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">New token</button>
+                                <button class="btn btn-outline disabled">Remove</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 200px;">Token name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="empty-row">
+                                        <td colspan="2" style="padding: 16px; font-weight: 400; color: #3c4043;">
+                                            Create a new <a href="#" class="link-text">server to server token</a> for this advertiser.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Data sharing settings
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Attribution <span class="help-icon">?</span>
+                </div>
+
+                <div class="section-content-row" style="margin-bottom: 24px;">
+                    <div class="section-left-label">Attribution models</div>
+                    <div class="section-right-content">
+                        <div class="data-table-container">
+                            <div class="warning-banner">
+                                Please click the Save button to save your changes.
+                            </div>
+                            <div class="table-toolbar">
+                                <button class="btn btn-outline" style="color: #137333; font-weight: 500;">New model...</button>
+                                <button class="btn btn-outline disabled">Make primary</button>
+                                <button class="btn btn-outline disabled">Remove</button>
+                            </div>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px;"><input type="checkbox"></th>
+                                        <th style="width: 80px;">Primary <span class="help-icon">?</span></th>
+                                        <th style="width: 200px;">Name</th>
+                                        <th style="width: 150px;">Attribution model</th>
+                                        <th style="width: 150px;">Attribution scope</th>
+                                        <th style="width: 120px;">Start date <span class="help-icon">?</span></th>
+                                        <th style="width: 150px;">Attributed impression</th>
+                                        <th>Modeled convers...</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="checkbox"></td>
+                                        <td>✓</td>
+                                        <td>System Floodlight model <span>0</span></td>
+                                        <td>Floodlight</td>
+                                        <td>Paid channels</td>
+                                        <td>06/05/2024</td>
+                                        <td>All</td>
+                                        <td>Include</td>
+                                    </tr>
+                                    <tr style="background-color: #e8f0fe;">
+                                        <td><input type="checkbox"></td>
+                                        <td></td>
+                                        <td>Last Click</td>
+                                        <td>Last interaction</td>
+                                        <td>Paid channels</td>
+                                        <td></td>
+                                        <td>All</td>
+                                        <td>Include</td>
+                                    </tr>
+                                    <tr style="background-color: #e8f0fe;">
+                                        <td><input type="checkbox"></td>
+                                        <td></td>
+                                        <td>Position Based</td>
+                                        <td>Position-based</td>
+                                        <td>Paid channels</td>
+                                        <td></td>
+                                        <td>All</td>
+                                        <td>Include</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-content-row">
+                    <div class="section-left-label">Viewable impressions</div>
+                    <div class="section-right-content">
+                        <div style="font-size: 13px; color: #3c4043; margin-bottom: 8px;">
+                            Choose the percentage of ActiveView and Engaged View Ineligible Impressions to include in your attribution model. Individual impressions will be randomly selected to make up this percentage.
+                        </div>
+                        <select class="select-field" style="width: 100px; margin-bottom: 8px;">
+                            <option value="50%">50%</option>
+                        </select>
+                        <div class="consent-hint">
+                            This control only applies if you've chosen to include viewable impressions or Engaged Views in your impression attribution.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Engaged View conversions
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">
+                        Time threshold <span class="help-icon">?</span>
+                    </div>
+                    <select class="select-field" style="width: 120px;">
+                        <option value=">= 10 sec">&ge; 10 sec</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">
+                        Quartile threshold <span class="help-icon">?</span>
+                    </div>
+                    <select class="select-field" style="width: 120px;">
+                        <option value="None">None</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">Device type</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <select class="select-field" style="width: 180px;">
+                            <option value="Connected TV + 3 more">Connected TV + 3 more</option>
+                        </select>
+                        <div class="tags-pill-list">
+                            <div class="pill-item">Connected TV <span class="pill-remove">×</span></div>
+                            <div class="pill-item">Desktop <span class="pill-remove">×</span></div>
+                            <div class="pill-item">Smartphone <span class="pill-remove">×</span></div>
+                            <div class="pill-item">Tablet <span class="pill-remove">×</span></div>
+                            <span class="clear-all-link">Clear all</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">Out-stream / In-stream</div>
+                    <select class="select-field" style="width: 120px;">
+                        <option value="All">All</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-row">
+                    <div class="dropdown-label">Skippable</div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked>
+                        <span>Required</span>
+                    </label>
+                </div>
+            </section>
+
+            <section class="form-section">
+                <div class="collapsible-header">
+                    <span class="arrow-down">▼</span>
+                    Active View custom video metric <span class="help-icon">?</span>
+                </div>
+
+                <div class="toggle-row" style="margin-bottom: 12px;">
+                    <div class="toggle-label">Custom metric</div>
+                    <div class="toggle-switch">
+                        <div class="toggle-option active-on">ON</div>
+                        <div class="toggle-option">OFF</div>
+                    </div>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">
+                        Visible % <span class="help-icon">?</span>
+                    </div>
+                    <select class="select-field" style="width: 120px;">
+                        <option value=">= 50%">&ge; 50%</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">
+                        Audible <span class="help-icon">?</span>
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox">
+                        <span>Required</span>
+                    </label>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">
+                        Time threshold <span class="help-icon">?</span>
+                    </div>
+                    <select class="select-field" style="width: 120px;">
+                        <option value="None">None</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px;">
+                    <div class="dropdown-label">
+                        Quartile threshold <span class="help-icon">?</span>
+                    </div>
+                    <select class="select-field" style="width: 120px;">
+                        <option value="None">None</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-row" style="margin-bottom: 12px; align-items: flex-start;">
+                    <div class="dropdown-label" style="padding-top: 6px;">Metric name</div>
+                    <div>
+                        <input type="text" class="search-input-field" value="50% in view" disabled style="background-color: #f1f3f4; color: #5f6368; width: 300px; margin-bottom: 6px;">
+                        <div>
+                            <label class="checkbox-label" style="margin-bottom: 4px;">
+                                <input type="checkbox">
+                                <span>Set custom name</span>
+                            </label>
+                            <div class="consent-hint">
+                                Suggested name based on your selection <span class="help-icon">?</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        function setExclusionToggle(isOn) {
+            const btnOn = document.getElementById('btn-on');
+            const btnOff = document.getElementById('btn-off');
+            const details = document.getElementById('exclusion-details');
+
+            if (isOn) {
+                btnOn.className = 'toggle-option active-on';
+                btnOff.className = 'toggle-option';
+                details.style.display = 'flex';
+            } else {
+                btnOn.className = 'toggle-option';
+                btnOff.className = 'toggle-option active-off';
+                details.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
