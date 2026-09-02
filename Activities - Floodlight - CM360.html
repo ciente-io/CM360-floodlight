@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campaign Manager 360 - Floodlight Activities</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .slide-panel {
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800 antialiased flex flex-col h-screen overflow-hidden">
+
+  <div class="bg-blue-50 border-b border-blue-200 px-4 py-2 flex items-center justify-between text-xs text-blue-900">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="info" class="w-4 h-4 text-blue-600"></i>
+      <span><strong>Verify your settings for consented data collection</strong> — Review which Google services can receive consented personal data from the European Economic Area (EEA)</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="hover:underline text-blue-700">Dismiss</button>
+      <button class="hover:underline text-blue-700">Learn more</button>
+      <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-3 py-1 rounded text-xs">View</button>
+    </div>
+  </div>
+
+  <div class="flex flex-1 overflow-hidden relative">
+    
+    <aside class="w-56 bg-white border-r border-gray-200 flex flex-col justify-between shrink-0">
+      <div class="py-3">
+        <div class="px-4 pb-4 border-b border-gray-100 flex items-center space-x-2">
+          <div class="w-6 h-6 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-xs">CM</div>
+          <span class="font-semibold text-sm text-gray-700">Campaign Manager 360</span>
+        </div>
+
+        <nav class="mt-3 text-xs space-y-1 px-2 font-medium text-gray-600">
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-gray-100">
+            <i data-lucide="megaphone" class="w-4 h-4"></i>
+            <span>Campaigns</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-gray-100">
+            <i data-lucide="building-2" class="w-4 h-4"></i>
+            <span>Properties</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-gray-100">
+            <i data-lucide="image" class="w-4 h-4"></i>
+            <span>Creatives</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-gray-100">
+            <i data-lucide="folder" class="w-4 h-4"></i>
+            <span>Creative projects</span>
+          </a>
+          <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-md hover:bg-gray-100">
+            <i data-lucide="layout" class="w-4 h-4"></i>
+            <span>Landing pages</span>
+          </a>
+          
+          <div class="pt-2">
+            <div class="flex items-center space-x-3 px-3 py-2 rounded-md text-green-700 font-semibold bg-green-50">
+              <i data-lucide="activity" class="w-4 h-4"></i>
+              <span>Floodlight</span>
+            </div>
+            <div class="ml-7 mt-1 space-y-1">
+              <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-gray-100 text-gray-600">Configuration</a>
+              <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-gray-100 text-gray-600">Google tag</a>
+              <a href="#" class="block px-3 py-1.5 rounded-md bg-green-100 text-green-800 font-semibold">Activities</a>
+              <a href="#" class="block px-3 py-1.5 rounded-md hover:bg-gray-100 text-gray-600">Activity groups</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="flex-1 bg-white flex flex-col overflow-y-auto">
+      <div class="p-6 border-b border-gray-200">
+        <h1 class="text-xl font-normal text-gray-800">Activities</h1>
+        <p class="text-xs text-gray-500 mt-1">Advertiser ID: 14669188</p>
+
+        <div class="mt-4 flex items-center space-x-3">
+          <button id="openPanelBtn" class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-1.5 rounded text-xs font-medium shadow-sm flex items-center space-x-1">
+            <span>New</span>
+          </button>
+          <button class="border border-gray-300 text-gray-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-50 flex items-center space-x-1">
+            <span>View: Summary</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 ml-1"></i>
+          </button>
+          <button class="border border-gray-300 text-gray-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-50 flex items-center space-x-1">
+            <span>Status</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 ml-1"></i>
+          </button>
+          <button class="border border-gray-300 text-gray-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-50">
+            Download all tags
+          </button>
+          <button class="border border-gray-300 text-gray-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-gray-50">
+            Bulk sheet
+          </button>
+        </div>
+      </div>
+
+      <div class="flex-1 p-6">
+        <div class="flex items-center space-x-2 mb-4">
+          <span class="inline-flex items-center px-2.5 py-1 rounded border border-gray-300 bg-gray-50 text-xs text-gray-700">
+            Status Active
+            <button class="ml-1 text-gray-400 hover:text-gray-600">
+              <i data-lucide="x" class="w-3 h-3"></i>
+            </button>
+          </span>
+        </div>
+
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <table class="w-full text-left text-xs text-gray-600">
+            <thead class="bg-gray-50 border-b border-gray-200 font-semibold text-gray-700">
+              <tr>
+                <th class="p-3 w-8"><i data-lucide="alert-circle" class="w-3 h-3 text-gray-400"></i></th>
+                <th class="p-3">Activity name</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Impressions yesterday</th>
+                <th class="p-3">Average impressions last 7 days</th>
+                <th class="p-3">Activity tag string</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="6" class="p-8 text-center text-gray-500">
+                  No Floodlight activities found.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <div id="backdrop" class="fixed inset-0 bg-black/30 hidden z-40"></div>
+
+    <div id="sidePanel" class="slide-panel fixed right-0 top-0 bottom-0 w-[500px] bg-white border-l border-gray-200 shadow-2xl z-50 transform translate-x-full flex flex-col">
+      
+      <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+        <div class="flex items-center space-x-3">
+          <button id="closePanelBtn" class="text-gray-500 hover:text-gray-700 rounded-full p-1 hover:bg-gray-100">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+          <h2 class="text-base font-normal text-gray-800">New Floodlight activity</h2>
+        </div>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-6 space-y-5 text-xs text-gray-700">
+        
+        <div class="flex items-center space-x-2">
+          <button class="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-1.5 rounded font-medium shadow-sm">Save</button>
+          <button id="cancelBtn" class="border border-gray-300 text-gray-700 px-4 py-1.5 rounded font-medium hover:bg-gray-50">Cancel</button>
+        </div>
+
+        <div class="space-y-4 pt-2">
+          <h3 class="font-medium text-gray-900 border-b border-gray-100 pb-2 text-sm">Identification</h3>
+
+          <div class="grid grid-cols-3 items-center gap-2">
+            <label class="text-gray-600">Name <span class="text-red-500">*</span></label>
+            <input type="text" class="col-span-2 border border-gray-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-600" />
+          </div>
+
+          <div class="grid grid-cols-3 items-center gap-2">
+            <label class="text-gray-600">Status</label>
+            <select class="col-span-2 border border-gray-300 rounded px-2 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-emerald-600">
+              <option value="Active">Active</option>
+              <option value="Archived">Archived</option>
+              <option value="Disabled">Disabled</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-3 items-start gap-2">
+            <label class="text-gray-600 pt-1">Type <span class="text-red-500">*</span></label>
+            <div class="col-span-2 space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input type="radio" name="type" value="Counter" id="typeCounter" class="text-emerald-600 focus:ring-emerald-500" />
+                <span>Counter</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input type="radio" name="type" value="Sales" id="typeSales" class="text-emerald-600 focus:ring-emerald-500" />
+                <span>Sales</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 items-center gap-2">
+            <label class="text-gray-600">Activity group <span class="text-red-500">*</span></label>
+            <div class="col-span-2">
+              <span id="activityGroupPlaceholder" class="text-gray-400 italic">Select a type above</span>
+              <select id="activityGroupSelect" class="hidden w-full border border-gray-300 rounded px-2 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-emerald-600">
+                <option value="Counter (count0)">Counter (count0)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 items-start gap-2">
+            <label class="text-gray-600 pt-1">Counting method <span class="text-red-500">*</span></label>
+            <div class="col-span-2">
+              <span id="countingMethodPlaceholder" class="text-gray-400 italic">Select a type above</span>
+              <div id="counterMethodOptions" class="hidden space-y-3">
+                <div>
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="counting_method" value="Standard" checked class="text-emerald-600 focus:ring-emerald-500" />
+                    <span class="font-medium text-gray-800">Standard</span>
+                  </label>
+                  <p class="text-gray-500 text-[11px] mt-0.5 ml-5">Count every conversion.</p>
+                </div>
+
+                <div>
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="counting_method" value="Unique" class="text-emerald-600 focus:ring-emerald-500" />
+                    <span class="font-medium text-gray-800">Unique</span>
+                  </label>
+                  <p class="text-gray-500 text-[11px] mt-0.5 ml-5">Count the first conversion for each unique user during each 24-hour day, from midnight to midnight, Eastern Time (US).</p>
+                </div>
+
+                <div>
+                  <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="radio" name="counting_method" value="Per session" class="text-emerald-600 focus:ring-emerald-500" />
+                    <span class="font-medium text-gray-800">Per session</span>
+                  </label>
+                  <p class="text-gray-500 text-[11px] mt-0.5 ml-5">Count one conversion per user per session. Session length is set by the site where the Floodlight tag is deployed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 items-center gap-2">
+            <label class="text-gray-600">Tag format</label>
+            <select class="col-span-2 border border-gray-300 rounded px-2 py-1.5 bg-white focus:outline-none focus:ring-1 focus:ring-emerald-600">
+              <option value="Google tag">Google tag</option>
+              <option value="Iframe">Iframe</option>
+              <option value="Image">Image</option>
+            </select>
+          </div>
+          <p class="text-[11px] text-gray-500 pl-[33%] leading-normal">
+            The Google tag sets new cookies on your domain, which will store a unique identifier for a user or the ad click that brought the user to your site. You must install this tag on every page of your website. 
+            <a href="#" class="text-blue-600 hover:underline">Learn more</a>
+          </p>
+
+          <div class="grid grid-cols-3 items-start gap-2 pt-2">
+            <label class="text-gray-600 pt-1">Attribution <span class="text-red-500">*</span></label>
+            <div class="col-span-2 space-y-2">
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input type="radio" name="attribution" class="text-emerald-600 focus:ring-emerald-500" />
+                <span>Enable activity for attribution</span>
+              </label>
+              <label class="flex items-center space-x-2 cursor-pointer">
+                <input type="radio" name="attribution" class="text-emerald-600 focus:ring-emerald-500" />
+                <span>Disable activity for attribution</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 items-center gap-2 pt-2">
+            <label class="text-gray-600">Expected URL</label>
+            <input type="text" class="col-span-2 border border-gray-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-600" placeholder="http://" />
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-3">
+          <button id="exclusionsAccordionBtn" class="flex items-center space-x-1.5 text-gray-800 font-medium w-full text-left focus:outline-none">
+            <i id="accordionArrow" data-lucide="chevron-right" class="w-4 h-4 text-gray-600 transition-transform duration-200"></i>
+            <span>Personalized ad exclusions</span>
+            <span class="inline-flex items-center justify-center w-3.5 h-3.5 border border-gray-400 rounded-full text-[9px] text-gray-500 ml-1">?</span>
+          </button>
+
+          <div id="exclusionsContent" class="hidden mt-4 pl-6">
+            <div class="grid grid-cols-3 items-start gap-2">
+              <label class="text-gray-500 leading-tight">Exclude locations from personalized ads</label>
+              <div class="col-span-2 space-y-2.5">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="location_exclusion" value="none" checked class="text-emerald-600 focus:ring-emerald-500" />
+                  <span class="text-gray-700">Don't exclude for this activity</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="location_exclusion" value="all" class="text-emerald-600 focus:ring-emerald-500" />
+                  <span class="text-gray-700">Exclude all locations for this activity</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="radio" name="location_exclusion" value="select" class="text-emerald-600 focus:ring-emerald-500" />
+                  <span class="text-gray-700">Exclude select locations for this activity</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-3">
+          <button id="previewAccordionBtn" class="flex items-center space-x-1.5 text-gray-800 font-medium w-full text-left focus:outline-none">
+            <i id="previewAccordionArrow" data-lucide="chevron-down" class="w-4 h-4 text-gray-600 transition-transform duration-200"></i>
+            <span>Floodlight tag preview</span>
+          </button>
+
+          <div id="previewContent" class="mt-4 space-y-6">
+            
+            <div class="space-y-2">
+              <div class="flex items-center space-x-1 text-gray-700 font-medium">
+                <span>Global snippet preview</span>
+                <span class="inline-flex items-center justify-center w-3.5 h-3.5 border border-gray-400 rounded-full text-[9px] text-gray-500 cursor-help">?</span>
+              </div>
+
+              <div class="flex items-center space-x-2 bg-amber-50 border border-amber-200 rounded p-2 text-[11px] text-amber-900">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0"></i>
+                <span><strong>Warning:</strong> This tag is incomplete and won't work until you save.</span>
+              </div>
+
+              <div class="bg-white border border-gray-300 rounded p-3 font-mono text-[11px] text-gray-700 leading-relaxed overflow-x-auto shadow-inner">
+                <p class="text-gray-400">&lt;!--</p>
+                <p class="text-gray-400">Start of global snippet: Please do not remove</p>
+                <p class="text-gray-400">Place this snippet between the &lt;head&gt; and &lt;/head&gt; tags on every page of your site.</p>
+                <p class="text-gray-400">--&gt;</p>
+                <p class="text-gray-400">&lt;!-- Google tag (gtag.js) --&gt;</p>
+                <p>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=DC-14669188"&gt;&lt;/script&gt;</p>
+                <p>&lt;script&gt;</p>
+                <p class="pl-4">window.dataLayer = window.dataLayer || [];</p>
+                <p class="pl-4">function gtag(){dataLayer.push(arguments);}</p>
+                <p class="pl-4">gtag('js', new Date());</p>
+                <br />
+                <p class="pl-4">gtag('config', 'DC-14669188');</p>
+                <p>&lt;/script&gt;</p>
+                <p class="text-gray-400">&lt;!-- End of global snippet: Please do not remove --&gt;</p>
+              </div>
+
+              <div class="text-[11px] text-gray-600 space-y-0.5 pt-1">
+                <p class="font-medium text-gray-800">How to implement the global snippet</p>
+                <p>
+                  Insert the global snippet between the &lt;head&gt; and &lt;/head&gt; tags. The global snippet section should be placed on every page of your site. 
+                  <a href="#" class="text-blue-600 hover:underline">Learn more</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-gray-100">
+              <div class="flex items-center space-x-1 text-gray-700 font-medium">
+                <span>Event snippet preview</span>
+                <span class="inline-flex items-center justify-center w-3.5 h-3.5 border border-gray-400 rounded-full text-[9px] text-gray-500 cursor-help">?</span>
+              </div>
+
+              <div class="flex items-center space-x-2 bg-amber-50 border border-amber-200 rounded p-2 text-[11px] text-amber-900">
+                <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0"></i>
+                <span><strong>Warning:</strong> This tag is incomplete and won't work until you save.</span>
+              </div>
+
+              <div class="bg-white border border-gray-300 rounded p-3 font-mono text-[11px] text-gray-700 leading-relaxed overflow-x-auto shadow-inner max-h-48">
+                <p class="text-gray-400">&lt;!--</p>
+                <p class="text-gray-400">Event snippet for Pageview on : Please do not remove.</p>
+                <p class="text-gray-400">Place this snippet on pages with events you're tracking.</p>
+                <p class="text-gray-400">Creation date: 08/15/2024</p>
+                <p class="text-gray-400">--&gt;</p>
+                <p>&lt;script&gt;</p>
+                <p class="pl-4">gtag('event', 'conversion', {</p>
+                <p class="pl-8">'allow_custom_scripts': true,</p>
+                <p class="pl-8">'send_to': 'DC-14669188/[activityGroupTagString]/[activityTagString]+standard'</p>
+                <p class="pl-4">});</p>
+                <p>&lt;/script&gt;</p>
+                <p>&lt;noscript&gt;</p>
+                <p class="pl-4">&lt;img src="https://ad.doubleclick.net/ddm/activity/src=14669188;type=[activityGroupTagString];cat=[activityTagString];dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;npa=;gdpr=${GDPR};gdpr_consent=${GDPR_CONSENT_755};ord=1?" width="1" height="1" alt=""/&gt;</p>
+                <p>&lt;/noscript&gt;</p>
+              </div>
+
+              <div class="text-[11px] text-gray-600 space-y-0.5 pt-1">
+                <p class="font-medium text-gray-800">How to implement the event snippet</p>
+                <p>
+                  The event snippet section should be placed on pages with events you're tracking, after the global snippet. 
+                  <a href="#" class="text-blue-600 hover:underline">Learn more</a>
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-3">
+          <button id="enhancedConversionsBtn" class="flex items-center space-x-1.5 text-gray-800 font-medium w-full text-left focus:outline-none">
+            <i id="enhancedConversionsArrow" data-lucide="chevron-right" class="w-4 h-4 text-gray-600 transition-transform duration-200"></i>
+            <span>Enhanced conversions</span>
+          </button>
+
+          <div id="enhancedConversionsContent" class="hidden mt-3 pl-6">
+            <label class="flex items-center space-x-2 cursor-pointer text-gray-700">
+              <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500 border-gray-300" />
+              <span>Add user-provided parameters to the tag preview.</span>
+              <a href="#" class="text-blue-600 hover:underline">Learn more about enhanced conversions</a>
+            </label>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-3">
+          <button id="advancedPropertiesBtn" class="flex items-center space-x-1.5 text-gray-800 font-medium w-full text-left focus:outline-none">
+            <i id="advancedPropertiesArrow" data-lucide="chevron-right" class="w-4 h-4 text-gray-600 transition-transform duration-200"></i>
+            <span>Advanced properties</span>
+          </button>
+
+          <div id="advancedPropertiesContent" class="hidden mt-4 pl-6 space-y-4">
+            
+            <div class="grid grid-cols-3 items-center gap-2">
+              <div class="flex items-center space-x-1">
+                <span class="text-gray-500">Require SSL-compliant tags (https)</span>
+                <span class="inline-flex items-center justify-center w-3.5 h-3.5 border border-gray-400 rounded-full text-[9px] text-gray-500 cursor-help">?</span>
+              </div>
+              <span class="col-span-2 text-gray-800 font-medium">Yes</span>
+            </div>
+
+            <div class="grid grid-cols-3 items-start gap-2">
+              <div class="flex items-center space-x-1 pt-1">
+                <span class="text-gray-500">Activity tag string</span>
+                <span class="inline-flex items-center justify-center w-3.5 h-3.5 border border-gray-400 rounded-full text-[9px] text-gray-500 cursor-help">?</span>
+              </div>
+              <div class="col-span-2 space-y-1">
+                <input type="text" class="w-44 border border-gray-300 rounded px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-600" />
+                <p class="text-gray-500 text-[11px] leading-normal">
+                  Once you save the Floodlight activity, this value is final. You can't change it later.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-3 pb-6">
+          <button id="customVariablesBtn" class="flex items-center space-x-1.5 text-gray-800 font-medium w-full text-left focus:outline-none">
+            <i id="customVariablesArrow" data-lucide="chevron-right" class="w-4 h-4 text-gray-600 transition-transform duration-200"></i>
+            <span>Custom Floodlight variables</span>
+            <span class="inline-flex items-center justify-center w-3.5 h-3.5 border border-gray-400 rounded-full text-[9px] text-gray-500 cursor-help">?</span>
+          </button>
+
+          <div id="customVariablesContent" class="hidden mt-4 pl-6">
+            <div class="grid grid-cols-3 items-start gap-2">
+              <span class="text-gray-500">Custom variables</span>
+              <div class="col-span-2 space-y-2">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="checkbox" checked class="rounded text-emerald-600 focus:ring-emerald-500 border-gray-300" />
+                  <span class="text-gray-700">u1: PagePath</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 border-gray-300" />
+                  <span class="text-gray-700">u2: Domain</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input type="checkbox" class="rounded text-emerald-600 focus:ring-emerald-500 border-gray-300" />
+                  <span class="text-gray-700">u3: Action</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const openPanelBtn = document.getElementById('openPanelBtn');
+    const closePanelBtn = document.getElementById('closePanelBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const sidePanel = document.getElementById('sidePanel');
+    const backdrop = document.getElementById('backdrop');
+
+    const typeCounter = document.getElementById('typeCounter');
+    const typeSales = document.getElementById('typeSales');
+    const activityGroupPlaceholder = document.getElementById('activityGroupPlaceholder');
+    const activityGroupSelect = document.getElementById('activityGroupSelect');
+    const countingMethodPlaceholder = document.getElementById('countingMethodPlaceholder');
+    const counterMethodOptions = document.getElementById('counterMethodOptions');
+
+    const exclusionsAccordionBtn = document.getElementById('exclusionsAccordionBtn');
+    const exclusionsContent = document.getElementById('exclusionsContent');
+    const accordionArrow = document.getElementById('accordionArrow');
+
+    const previewAccordionBtn = document.getElementById('previewAccordionBtn');
+    const previewContent = document.getElementById('previewContent');
+    const previewAccordionArrow = document.getElementById('previewAccordionArrow');
+
+    const enhancedConversionsBtn = document.getElementById('enhancedConversionsBtn');
+    const enhancedConversionsContent = document.getElementById('enhancedConversionsContent');
+    const enhancedConversionsArrow = document.getElementById('enhancedConversionsArrow');
+
+    const advancedPropertiesBtn = document.getElementById('advancedPropertiesBtn');
+    const advancedPropertiesContent = document.getElementById('advancedPropertiesContent');
+    const advancedPropertiesArrow = document.getElementById('advancedPropertiesArrow');
+
+    const customVariablesBtn = document.getElementById('customVariablesBtn');
+    const customVariablesContent = document.getElementById('customVariablesContent');
+    const customVariablesArrow = document.getElementById('customVariablesArrow');
+
+    function openPanel() {
+      sidePanel.classList.remove('translate-x-full');
+      backdrop.classList.remove('hidden');
+    }
+
+    function closePanel() {
+      sidePanel.classList.add('translate-x-full');
+      backdrop.classList.add('hidden');
+    }
+
+    // Toggle options when "Counter" is selected
+    typeCounter.addEventListener('change', () => {
+      if (typeCounter.checked) {
+        activityGroupPlaceholder.classList.add('hidden');
+        activityGroupSelect.classList.remove('hidden');
+
+        countingMethodPlaceholder.classList.add('hidden');
+        counterMethodOptions.classList.remove('hidden');
+      }
+    });
+
+    // Reset view if "Sales" is selected
+    typeSales.addEventListener('change', () => {
+      if (typeSales.checked) {
+        activityGroupPlaceholder.classList.remove('hidden');
+        activityGroupSelect.classList.add('hidden');
+
+        countingMethodPlaceholder.classList.remove('hidden');
+        counterMethodOptions.classList.add('hidden');
+      }
+    });
+
+    // Accordion Toggle helper function
+    function setupAccordion(button, content, arrow) {
+      button.addEventListener('click', () => {
+        const isHidden = content.classList.contains('hidden');
+        if (isHidden) {
+          content.classList.remove('hidden');
+          arrow.style.transform = 'rotate(90deg)';
+        } else {
+          content.classList.add('hidden');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      });
+    }
+
+    setupAccordion(exclusionsAccordionBtn, exclusionsContent, accordionArrow);
+    setupAccordion(previewAccordionBtn, previewContent, previewAccordionArrow);
+    setupAccordion(enhancedConversionsBtn, enhancedConversionsContent, enhancedConversionsArrow);
+    setupAccordion(advancedPropertiesBtn, advancedPropertiesContent, advancedPropertiesArrow);
+    setupAccordion(customVariablesBtn, customVariablesContent, customVariablesArrow);
+
+    openPanelBtn.addEventListener('click', openPanel);
+    closePanelBtn.addEventListener('click', closePanel);
+    cancelBtn.addEventListener('click', closePanel);
+    backdrop.addEventListener('click', closePanel);
+  </script>
+</body>
+</html>
